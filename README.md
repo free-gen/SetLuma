@@ -7,7 +7,7 @@ Your monitor must have DDC-CI support.
 
 # Building
 
-Install the NET.SDK and open the file ```build.cmd```
+Install the NET.SDK and open the file ```build.bat```
 
 # Using
 
