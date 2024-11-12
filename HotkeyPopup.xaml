@@ -1,0 +1,66 @@
+<Window x:Class="SetLuma.HotkeyPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SetLuma"
+        Width="192"
+        Height="68"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        BorderThickness="1"
+        BorderBrush="Transparent"
+        ShowActivated="False"
+        Background="Transparent"
+        WindowStartupLocation="Manual"
+        UseLayoutRounding="True">
+
+    <Window.Resources>
+        <local:ProgressWidthConverter x:Key="ProgressWidthConverter"/>
+    </Window.Resources>
+
+    <Border x:Name="Border" Background="#F5F5F5" BorderBrush="#EEEEEEC8" BorderThickness="1" CornerRadius="8" Width="172" Height="48">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" BlurRadius="15" ShadowDepth="5" Opacity="0.15" Direction="270"/>
+        </Border.Effect>
+
+        <Grid>
+            <Canvas Grid.Row="1" Grid.Column="0" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,0,0">
+                <Path x:Name="IconPath" Fill="#272727" Data="M960 192v-128q0 -26 19 -45t45 -19t45 19t19 45v128q0 26 -19 45t-45 19t-45 -19t-19 -45zM256 320q0 -26 19 -45t45 -19t45 19l128 128q19 19 19 45t-19 45t-45 19t-45 -19l-128 -128q-19 -19 -19 -45zM1536 448q0 -26 19 -45l128 -128q19 -19 45 -19t45 19t19 45 t-19 45l-128 128q-19 19 -45 19t-45 -19t-19 -45zM512 1024v-10q0 -104 41.5 -195.5t112 -159.5t163 -107.5t195.5 -39.5q106 0 199.5 40t163 109.5t109.5 163t40 199.5t-40 199.5t-109.5 163t-163 109.5t-199.5 40t-199.5 -40t-163 -109.5t-109.5 -163t-40 -199.5z M1408 1024v-8q0 -78 -31 -146.5t-84 -119.5t-122.5 -80.5t-146.5 -29.5q-80 0 -150 30t-122 82t-82 122t-30 150t30 150t82 122t122 82t150 30t150 -30t122 -82t82 -122t30 -150zM64 1088q-26 0 -45 -19t-19 -45t19 -45t45 -19h128q26 0 45 19t19 45t-19 45t-45 19h-128z M1856 1088q-26 0 -45 -19t-19 -45t19 -45t45 -19h128q26 0 45 19t19 45t-19 45t-45 19h-128zM256 1728q0 -26 19 -45l128 -128q19 -19 45 -19t45 19t19 45t-19 45l-128 128q-19 19 -45 19t-45 -19t-19 -45zM1536 1600q0 -26 19 -45t45 -19t45 19l128 128q19 19 19 45t-19 45 t-45 19t-45 -19l-128 -128q-19 -19 -19 -45zM960 1984v-128q0 -26 19 -45t45 -19t45 19t19 45v128q0 26 -19 45t-45 19t-45 -19t-19 -45z" Height="16" Stretch="Fill" Width="16"/>
+            </Canvas>
+
+            <ProgressBar x:Name="ProgressBar"
+                         HorizontalAlignment="Right"
+                         Minimum="0"
+                         Maximum="100"
+                         Width="110"
+                         Height="4"
+                         Background="#858585"
+                         Foreground="LightBlue"
+                         BorderThickness="0"
+                         Margin="0,0,14,0">
+                <ProgressBar.Template>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="2"/>
+                            <Border x:Name="PART_Indicator"
+                                    Background="{TemplateBinding Foreground}"
+                                    CornerRadius="2"
+                                    HorizontalAlignment="Left">
+                                <Border.Width>
+                                    <MultiBinding Converter="{StaticResource ProgressWidthConverter}">
+                                        <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="ActualWidth"/>
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Value"/>
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum"/>
+                                    </MultiBinding>
+                                </Border.Width>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </ProgressBar.Template>
+            </ProgressBar>
+        </Grid>
+    </Border>
+
+</Window>
